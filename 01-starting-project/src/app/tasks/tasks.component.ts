@@ -1,16 +1,20 @@
 import { Component, input, Input } from '@angular/core';
 import { dummyTasks } from '../../dummy-tasks';
+import { TaskComponent } from './task/task.component';
+import { User } from '../user/user.component';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [],
+  imports: [TaskComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  userId = input<string>();
-  @Input() name?: string;
+  user = input.required<User>();
+  tasks = dummyTasks;
 
-  tasks = dummyTasks.filter((task) => task.userId === this.userId());
+  get selectedUserTasks() {
+    return this.tasks.filter((task) => task.userId === this.user()?.id);
+  }
 }
