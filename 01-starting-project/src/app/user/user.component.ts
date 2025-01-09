@@ -7,18 +7,7 @@ import {
   computed,
   EventEmitter,
 } from '@angular/core';
-
-// type User = {
-//   id: string;
-//   name: string;
-//   avatar: string;
-// };
-
-export interface User {
-  id: string;
-  name: string;
-  avatar: string;
-}
+import { type User } from './user.model';
 
 @Component({
   selector: 'app-user',
@@ -38,6 +27,7 @@ export class UserComponent {
   // id = input.required<string>();
   // or
   user = input.required<User>();
+  selected = input.required<boolean>();
 
   // @Output() select = new EventEmitter<string>();
   // or
