@@ -3,6 +3,7 @@ import { dummyTasks } from '../../dummy-tasks';
 import { TaskComponent } from './task/task.component';
 import { type User } from '../user/user.model';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { type EnteredTask } from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -29,6 +30,17 @@ export class TasksComponent {
   }
 
   onCancelAddTask() {
+    this.showAddTask = false;
+  }
+
+  onAddTask(enteredTask: EnteredTask) {
+    this.tasks.push({
+      id: new Date().getTime().toString(),
+      title: enteredTask.title,
+      summary: enteredTask.summary,
+      dueDate: enteredTask.date,
+      userId: this.user().id,
+    });
     this.showAddTask = false;
   }
 }
