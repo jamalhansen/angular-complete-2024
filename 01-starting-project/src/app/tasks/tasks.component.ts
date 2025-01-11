@@ -4,11 +4,12 @@ import { TaskComponent } from './task/task.component';
 import { type User } from '../user/user.model';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { type EnteredTask } from './task/task.model';
+import { CardComponent } from '../shared/card/card.component';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskComponent, AddTaskComponent],
+  imports: [TaskComponent, AddTaskComponent, CardComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })
