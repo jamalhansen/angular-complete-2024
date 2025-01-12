@@ -1,6 +1,14 @@
-import { Component, EventEmitter, signal, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  signal,
+  Output,
+  inject,
+  Input,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { type EnteredTask } from '../task/task.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-add-task',
@@ -10,23 +18,26 @@ import { type EnteredTask } from '../task/task.model';
   styleUrl: './add-task.component.css',
 })
 export class AddTaskComponent {
-  @Output() cancel = new EventEmitter<void>();
-  @Output() add = new EventEmitter<EnteredTask>();
+  @Input({ required: true }) userId!: string;
+  @Output() close = new EventEmitter<void>();
 
   //enteredTitle = signal('');  //you can use signal for two way binding, no change necessary to template
   enteredTitle = '';
   enteredSummary = '';
   enteredDate = '';
+  private tasksService = inject(TasksService);
 
   onCancel() {
-    this.cancel.emit();
+    this.close.emit();
   }
 
   onSubmit() {
-    this.add.emit({
+    this.tasksService.addTask({
       title: this.enteredTitle,
       summary: this.enteredSummary,
       date: this.enteredDate,
+      userId: this.userId,
     });
+    this.close.emit();
   }
 }

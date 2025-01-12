@@ -10,4 +10,5 @@ export interface EnteredTask {
   title: string;
   summary: string;
   date: string;
+  userId: string;
 }
